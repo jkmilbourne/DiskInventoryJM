@@ -1,0 +1,42 @@
+﻿@model List<Disk>
+@{
+    ViewData["Title"] = "Disk Page";
+}
+
+<h2>Borrower List</h2>
+
+@*<a asp-controller="Movie" asp-action="Add">Add New Movie</a>*@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Disk Id</th>
+            <th>Disk Name</th>
+            <th>Release Date</th>
+            <th>Status Code</th>
+            <th>Genre Code</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var disk in Model)
+        {
+            <tr>
+                <td>@disk.DiskId.</td>
+                <td>@disk.DiskName</td>
+                <td>@disk.ReleaseDate</td>
+                <td>@disk.StatusCode</td>
+                <td>@disk.GenreCode</td>
+                @*<td>
+                        <a asp-controller="Movie" asp-action="Edit"
+                           asp-route-id="@movie.MovieId"
+                           asp-route-slug="@movie.Slug">Edit</a>
+                        <a asp-controller="Movie" asp-action="Delete"
+                           asp-route-id="@movie.MovieId"
+                           asp-route-slug="@movie.Slug">Delete</a>
+                    </td>*@
+            </tr>
+        }
+    </tbody>
+</table>
+
+
