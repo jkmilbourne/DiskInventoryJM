@@ -4,7 +4,7 @@
 }
 
 <h2>Artist List</h2>
-
+<a asp-controller="Artist" asp-action="Add">Add an Artst</a>
 @*<a asp-controller="Movie" asp-action="Add">Add New Movie</a>*@
 <table class="table table-bordered table-striped">
     <thead>
@@ -18,20 +18,24 @@
     <tbody>
         @foreach (var artist in Model)
         {
-            <tr>
-                <td>@artist.ArtistId</td>
-                <td>@artist.ArtistFname</td>
-                <td>@artist.ArtistLname</td>
-                <td>@artist.ArtistTypeCode</td>
-                @*<td>
-                    <a asp-controller="Movie" asp-action="Edit"
-                       asp-route-id="@movie.MovieId"
-                       asp-route-slug="@movie.Slug">Edit</a>
-                    <a asp-controller="Movie" asp-action="Delete"
-                       asp-route-id="@movie.MovieId"
-                       asp-route-slug="@movie.Slug">Delete</a>
-                </td>*@
-            </tr>
+        <tr>
+            <td>@artist.ArtistId</td>
+            <td>@artist.ArtistFname</td>
+            <td>@artist.ArtistLname</td>
+            <td>@artist.ArtistTypeCode</td>
+            <td> 
+                <a asp-controller="Artist" asp-action="Edit" asp-route-id="@artist.ArtistId">Edit</a>
+                <a asp-controller="Artist" asp-action="Delete" asp-route-id="@artist.ArtistId">Delete</a>
+            </td>
+            @*<td>
+            <a asp-controller="Movie" asp-action="Edit"
+               asp-route-id="@movie.MovieId"
+               asp-route-slug="@movie.Slug">Edit</a>
+            <a asp-controller="Movie" asp-action="Delete"
+               asp-route-id="@movie.MovieId"
+               asp-route-slug="@movie.Slug">Delete</a>
+        </td>*@
+        </tr>
         }
     </tbody>
 </table>

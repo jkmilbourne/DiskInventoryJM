@@ -4,7 +4,7 @@
 }
 
 <h2>Borrower List</h2>
-
+<a asp-controller="Borrower" asp-action="Add">Add a Borrower</a>
 @*<a asp-controller="Movie" asp-action="Add">Add New Movie</a>*@
 <table class="table table-bordered table-striped">
     <thead>
@@ -25,6 +25,10 @@
                 <td>@borrower.Mi</td>
                 <td>@borrower.Lname</td>
                 <td>@borrower.Phone</td>
+                <td>
+                    <a asp-controller="Borrower" asp-action="Edit" asp-route-id="@borrower.BorrowerId">Edit</a>
+                    <a asp-controller="Borrower" asp-action="Delete" asp-route-id="@borrower.BorrowerId">Delete</a>
+                </td>
                 @*<td>
                         <a asp-controller="Movie" asp-action="Edit"
                            asp-route-id="@movie.MovieId"

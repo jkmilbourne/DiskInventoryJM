@@ -1,0 +1,13 @@
+﻿@model Artist
+@{ 
+    ViewBag.Title = "Delete Artist";
+}
+
+<h2>Confrim Delete</h2>
+<h3>@Model.ArtistFname @Model.ArtistLname</h3>
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="ArtistId" />
+
+    <button type="submit" class="btn btn-primary">Delete</button>
+    <a asp-controller="Artist" asp-action="Index" class="btn btn-primary">Cancel</a>
+</form>
