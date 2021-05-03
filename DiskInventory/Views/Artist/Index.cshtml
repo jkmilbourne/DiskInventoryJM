@@ -9,9 +9,8 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Artist Id</th>
+            <th>Last or Group Name</th>
             <th>First Name</th>
-            <th>Last Name</th>
             <th>Artist Type</th>
         </tr>
     </thead>
@@ -19,22 +18,13 @@
         @foreach (var artist in Model)
         {
         <tr>
-            <td>@artist.ArtistId</td>
-            <td>@artist.ArtistFname</td>
             <td>@artist.ArtistLname</td>
-            <td>@artist.ArtistTypeCode</td>
+            <td>@artist.ArtistFname</td>
+            <td>@artist.ArtistTypeCodeNavigation.ArtistTypeDesc</td>
             <td> 
-                <a asp-controller="Artist" asp-action="Edit" asp-route-id="@artist.ArtistId">Edit</a>
+                <a asp-controller="Artist" asp-action="Edit" asp-route-id="@artist.ArtistId">Edit</a> | 
                 <a asp-controller="Artist" asp-action="Delete" asp-route-id="@artist.ArtistId">Delete</a>
             </td>
-            @*<td>
-            <a asp-controller="Movie" asp-action="Edit"
-               asp-route-id="@movie.MovieId"
-               asp-route-slug="@movie.Slug">Edit</a>
-            <a asp-controller="Movie" asp-action="Delete"
-               asp-route-id="@movie.MovieId"
-               asp-route-slug="@movie.Slug">Delete</a>
-        </td>*@
         </tr>
         }
     </tbody>

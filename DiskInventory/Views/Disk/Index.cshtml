@@ -9,25 +9,24 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Disk Id</th>
             <th>Disk Name</th>
             <th>Release Date</th>
             <th>Status Code</th>
             <th>Genre Code</th>
-
+            <th>Disk Type</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var disk in Model)
         {
         <tr>
-            <td>@disk.DiskId</td>
             <td>@disk.DiskName</td>
-            <td>@disk.ReleaseDate</td>
-            <td>@disk.StatusCode</td>
-            <td>@disk.GenreCode</td>
+            <td>@disk.ReleaseDate.ToShortDateString()</td>
+            <td>@disk.StatusCodeNavigation.StatusDesc</td>
+            <td>@disk.GenreCodeNavigation.GenreDesc</td>
+            <td>@disk.DiskType.DiskTypeDesc</td>
             <td>
-                <a asp-controller="Disk" asp-action="Edit" asp-route-id="@disk.DiskId">Edit</a>
+                <a asp-controller="Disk" asp-action="Edit" asp-route-id="@disk.DiskId">Edit</a> | 
                 <a asp-controller="Disk" asp-action="Delete" asp-route-id="@disk.DiskId">Delete</a>
             </td>
         </tr>

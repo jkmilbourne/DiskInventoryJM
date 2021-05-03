@@ -10,6 +10,7 @@ namespace DiskInventory.Controllers
 {
     public class BorrowerController : Controller
     {
+        //Create database context
         private disk_inventoryjmContext context { get; set; }
 
         public BorrowerController(disk_inventoryjmContext ctx)
@@ -17,6 +18,7 @@ namespace DiskInventory.Controllers
             context = ctx;
         }
 
+        //Index method that lists all borrowers on the database
         public IActionResult Index()
         {
             var borrowers = context.Borrowers
@@ -26,6 +28,7 @@ namespace DiskInventory.Controllers
             return View(borrowers);
         }
 
+        //Add Method that runs and lists all borrowers from HttpGet request
         [HttpGet]
         public IActionResult Add()
         {
@@ -33,6 +36,7 @@ namespace DiskInventory.Controllers
             return View("Edit", new Borrower());
         }
 
+        //Edit method that runs and lists all borrowers from HttpGet request
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -41,6 +45,7 @@ namespace DiskInventory.Controllers
             return View(borrower);
         }
 
+        //Edit Method that uses stored procedures to either add a borrower if borrower id is 0 or edits that passed borrower
         [HttpPost]
         public IActionResult Edit(Borrower borrower)
         {
@@ -48,13 +53,17 @@ namespace DiskInventory.Controllers
             {
                 if (borrower.BorrowerId == 0)
                 {
-                    context.Borrowers.Add(borrower);
+                    //context.Borrowers.Add(borrower);
+                    context.Database.ExecuteSqlRaw("execute sp_ins_borrower @p0, @p1, @p2, @p3",
+                        parameters: new[] { borrower.Fname, borrower.Mi, borrower.Lname, borrower.Phone.ToString() });
                 }
                 else
                 {
-                    context.Borrowers.Update(borrower);
+                    //context.Borrowers.Update(borrower);
+                    context.Database.ExecuteSqlRaw("execute sp_upd_borrower @p0, @p1, @p2, @p3, @p4",
+                        parameters: new[] { borrower.BorrowerId.ToString(), borrower.Fname, borrower.Mi, borrower.Lname, borrower.Phone.ToString() });
                 }
-                context.SaveChanges();
+                //context.SaveChanges();
                 return RedirectToAction("Index", "Borrower");
             }
             else
@@ -64,6 +73,7 @@ namespace DiskInventory.Controllers
             }
         }
 
+        //Delete method that runs on HttpGet request
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -71,11 +81,14 @@ namespace DiskInventory.Controllers
             return View(borrower);
         }
 
+        //Delete method that uses a stored prodcedure to delete passed Borrower
         [HttpPost]
         public IActionResult Delete(Borrower borrower)
         {
-            context.Borrowers.Remove(borrower);
-            context.SaveChanges();
+            //context.Borrowers.Remove(borrower);
+            //context.SaveChanges();
+            context.Database.ExecuteSqlRaw("execute sp_del_borrower @p0",
+                        parameters: new[] { borrower.BorrowerId.ToString() });
             return RedirectToAction("Index", "Artist");
         }
     }
