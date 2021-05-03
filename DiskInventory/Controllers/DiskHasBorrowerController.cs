@@ -10,12 +10,15 @@ namespace DiskInventory.Controllers
 {
     public class DiskHasBorrowerController : Controller
     {
+        //Create context
         private disk_inventoryjmContext context { get; set; }
 
         public DiskHasBorrowerController(disk_inventoryjmContext ctx)
         {
             context = ctx;
         }
+
+        //Index method that lists all info important for checkout process
         public IActionResult Index()
         {
             var diskHasBorrowers = context.DiskHasBorrowers
@@ -26,6 +29,7 @@ namespace DiskInventory.Controllers
             return View(diskHasBorrowers);
         }
 
+        //Method that adds new checkout to database
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
@@ -37,6 +41,7 @@ namespace DiskInventory.Controllers
             return View("Edit", newdiskHasBorrower);
         }
 
+        //Edit method that runs on HttpGet
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -47,6 +52,7 @@ namespace DiskInventory.Controllers
             return View(diskHasBorrower);
         }
 
+        //Edit method that either adds a new checkout if diskhasborrowerid is 0 or edits the checkout that is passed
         [HttpPost]
         public IActionResult Edit(DiskHasBorrower diskHasBorrower)
         {

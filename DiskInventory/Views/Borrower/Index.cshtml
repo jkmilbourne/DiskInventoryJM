@@ -9,7 +9,6 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Borrower Id</th>
             <th>First Name</th>
             <th>Middle Initial</th>
             <th>Last Name</th>
@@ -20,7 +19,6 @@
         @foreach (var borrower in Model)
         {
             <tr>
-                <td>@borrower.BorrowerId</td>
                 <td>@borrower.Fname</td>
                 <td>@borrower.Mi</td>
                 <td>@borrower.Lname</td>
